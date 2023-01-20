@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_outer_classname = "ExerciseProto";
+
+package gaintain;
+
+service ExerciseService {
+  rpc ListExercises (ExercisesRequest) returns (Exercises) {}
+  rpc CreateExercise (NewExercise) returns (Exercise) {}
+  rpc GetExercise (ExerciseRequest) returns (Exercise) {}
+  rpc UpdateExercise (Exercise) returns (Exercise) {}
+  rpc DeleteExercise (ExerciseRequest) returns (Exercise) {}
+}
+
+message Exercise {
+  string id = 1;
+  string user_id = 2;
+  string name = 3;
+  string description = 4;
+}
+message NewExercise {
+  string user_id = 1;
+  string name = 2;
+  string description = 3;
+}
+message Exercises {
+  repeated Exercise exercises = 1;
+}
+
+message ExercisesRequest {}
+message ExerciseRequest {
+  string id = 1;
+}

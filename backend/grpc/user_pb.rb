@@ -11,9 +11,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 3
     end
     add_message "gaintain.NewUser" do
-      optional :email, :string, 2
-      optional :name, :string, 3
-      optional :password, :string, 4
+      optional :email, :string, 1
+      optional :name, :string, 2
+      optional :password, :string, 3
     end
     add_message "gaintain.ModifyUser" do
       optional :id, :string, 1

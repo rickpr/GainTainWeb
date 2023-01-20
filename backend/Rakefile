@@ -53,13 +53,8 @@ namespace :g do
     File.open(path, 'w') do |file|
       file.write <<-EOF
 class #{migration_class} < ActiveRecord::Migration
-
-  def self.up
+  def change
   end
-
-  def self.down
-  end
-
 end
       EOF
     end

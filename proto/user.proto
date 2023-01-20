@@ -19,7 +19,6 @@ option java_outer_classname = "UserProto";
 
 package gaintain;
 
-// The greeting service definition.
 service UserService {
   rpc ListUsers (UsersRequest) returns (Users) {}
   rpc CreateUser (NewUser) returns (User) {}
@@ -34,9 +33,9 @@ message User {
   string name = 3;
 }
 message NewUser {
-  string email = 2;
-  string name = 3;
-  string password = 4;
+  string email = 1;
+  string name = 2;
+  string password = 3;
 }
 message ModifyUser {
   string id = 1;

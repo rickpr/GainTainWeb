@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_outer_classname = "SupersetProto";
+
+package gaintain;
+
+service SupersetService {
+  rpc ListSupersets (SupersetsRequest) returns (Supersets) {}
+  rpc CreateSuperset (NewSuperset) returns (Superset) {}
+  rpc GetSuperset (SupersetRequest) returns (Superset) {}
+  rpc UpdateSuperset (Superset) returns (Superset) {}
+  rpc DeleteSuperset (SupersetRequest) returns (Superset) {}
+}
+
+message Superset {
+  string id = 1;
+  string workout_id = 2;
+}
+message NewSuperset {
+  string workout_id = 1;
+}
+message Supersets {
+  repeated Superset supersets = 1;
+}
+
+message SupersetsRequest {}
+message SupersetRequest {
+  string id = 1;
+}

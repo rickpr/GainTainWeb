@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_outer_classname = "SetProto";
+
+package gaintain;
+
+service SetService {
+  rpc ListSets (SetsRequest) returns (Sets) {}
+  rpc CreateSet (NewSet) returns (Set) {}
+  rpc GetSet (SetRequest) returns (Set) {}
+  rpc UpdateSet (Set) returns (Set) {}
+  rpc DeleteSet (SetRequest) returns (Set) {}
+}
+
+message Set {
+  string id = 1;
+  string exercise_id = 2;
+  string superset_id = 3;
+}
+message NewSet {
+  string exercise_id = 1;
+  string superset_id = 2;
+}
+message Sets {
+  repeated Set sets = 1;
+}
+
+message SetsRequest {}
+message SetRequest {
+  string id = 1;
+}

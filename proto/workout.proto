@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_outer_classname = "WorkoutProto";
+
+package gaintain;
+
+service WorkoutService {
+  rpc ListWorkouts (WorkoutsRequest) returns (Workouts) {}
+  rpc CreateWorkout (NewWorkout) returns (Workout) {}
+  rpc GetWorkout (WorkoutRequest) returns (Workout) {}
+  rpc UpdateWorkout (Workout) returns (Workout) {}
+  rpc DeleteWorkout (WorkoutRequest) returns (Workout) {}
+}
+
+message Workout {
+  string id = 1;
+  string user_id = 2;
+  string name = 3;
+  string description = 4;
+}
+message NewWorkout {
+  string user_id = 1;
+  string name = 2;
+  string description = 3;
+}
+message Workouts {
+  repeated Workout workouts = 1;
+}
+
+message WorkoutsRequest {}
+message WorkoutRequest {
+  string id = 1;
+}

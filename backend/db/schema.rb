@@ -10,15 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_18_133612) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_19_193107) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "exercises", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "name", null: false
+    t.text "description"
+    t.index ["user_id"], name: "index_exercises_on_user_id"
+  end
+
+  create_table "sets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "exercise_id", null: false
+    t.bigint "superset_id", null: false
+    t.integer "reps"
+    t.index ["exercise_id"], name: "index_sets_on_exercise_id"
+    t.index ["superset_id"], name: "index_sets_on_superset_id"
+  end
+
+  create_table "supersets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "workout_id", null: false
+    t.integer "position", null: false
+    t.index ["workout_id"], name: "index_supersets_on_workout_id"
+  end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "email", null: false
     t.text "hashed_password", null: false
     t.text "name", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+  end
+
+  create_table "workouts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "name", null: false
+    t.text "description"
+    t.index ["user_id"], name: "index_workouts_on_user_id"
   end
 
 end

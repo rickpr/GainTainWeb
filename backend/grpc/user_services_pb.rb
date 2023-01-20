@@ -21,7 +21,6 @@ require 'user_pb'
 
 module Gaintain
   module UserService
-    # The greeting service definition.
     class Service
 
       include ::GRPC::GenericService

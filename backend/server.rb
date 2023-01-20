@@ -17,8 +17,7 @@ ActiveRecord::Base.establish_connection(
 )
 
 
-# GreeterServer is simple server that implements the Helloworld Greeter server.
-class GreeterServer < Gaintain::UserService::Service
+class GaintainServer < Gaintain::UserService::Service
   def list_users(_unused_request, _unused_call)
     Gaintain::Users.new(users: User.all.map(&:to_proto))
   end
@@ -50,12 +49,10 @@ class GreeterServer < Gaintain::UserService::Service
   end
 end
 
-# main starts an RpcServer that receives requests to GreeterServer at the sample
-# server port.
 def main
   s = GRPC::RpcServer.new
   s.add_http2_port('0.0.0.0:50051', :this_port_is_insecure)
-  s.handle(GreeterServer)
+  s.handle(GaintainServer)
   # Runs the server with SIGHUP, SIGINT and SIGTERM signal handlers to
   #   gracefully shutdown.
   # User could also choose to run server via call to run_till_terminated

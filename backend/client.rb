@@ -14,9 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Sample app that connects to a Greeter service.
+# Sample app that connects to a Gaintain service.
 #
-# Usage: $ path/to/greeter_client.rb
+# Usage: $ path/to/client.rb
 
 require 'grpc'
 
@@ -30,11 +30,11 @@ def main
   stub = Gaintain::UserService::Stub.new(hostname, :this_channel_is_insecure)
   begin
     message = stub.list_users(Gaintain::UserRequest.new)
-    p "Greeting: #{message}"
+    p "Users: #{message}"
     message = stub.create_user(Gaintain::NewUser.new(name: 'Ricardo', password: 'password', email: 'fdisk@fdisk.co'))
     p "Created user #{message}"
     message = stub.list_users(Gaintain::UserRequest.new)
-    p "Greeting: #{message}"
+    p "Users: #{message}"
   rescue GRPC::BadStatus => e
     abort "ERROR: #{e.message}"
   end

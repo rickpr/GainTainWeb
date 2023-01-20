@@ -5,6 +5,8 @@ require 'bcrypt'
 require './models/application_record'
 
 class User < ApplicationRecord
+  has_many :workouts
+
   def password
     @password ||= BCrypt::Password.new(hashed_password)
   end
