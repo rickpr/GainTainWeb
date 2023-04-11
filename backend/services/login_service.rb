@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require './grpc/login_services_pb'
-require './lib/auth'
 
 # User GRPC service
 class LoginService < Gaintain::LoginService::Service

@@ -9,6 +9,9 @@ export class Superset extends jspb.Message {
   getWorkoutId(): string;
   setWorkoutId(value: string): Superset;
 
+  getPosition(): number;
+  setPosition(value: number): Superset;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Superset.AsObject;
   static toObject(includeInstance: boolean, msg: Superset): Superset.AsObject;
@@ -21,6 +24,7 @@ export namespace Superset {
   export type AsObject = {
     id: string,
     workoutId: string,
+    position: number,
   }
 }
 

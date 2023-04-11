@@ -10,11 +10,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :user_id, :string, 2
       optional :name, :string, 3
       optional :description, :string, 4
+      optional :video_url, :string, 5
     end
     add_message "gaintain.NewExercise" do
       optional :user_id, :string, 1
       optional :name, :string, 2
       optional :description, :string, 3
+      optional :video_url, :string, 4
     end
     add_message "gaintain.Exercises" do
       repeated :exercises, :message, 1, "gaintain.Exercise"

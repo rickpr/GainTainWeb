@@ -15,6 +15,9 @@ export class Exercise extends jspb.Message {
   getDescription(): string;
   setDescription(value: string): Exercise;
 
+  getVideoUrl(): string;
+  setVideoUrl(value: string): Exercise;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Exercise.AsObject;
   static toObject(includeInstance: boolean, msg: Exercise): Exercise.AsObject;
@@ -29,6 +32,7 @@ export namespace Exercise {
     userId: string,
     name: string,
     description: string,
+    videoUrl: string,
   }
 }
 
@@ -41,6 +45,9 @@ export class NewExercise extends jspb.Message {
 
   getDescription(): string;
   setDescription(value: string): NewExercise;
+
+  getVideoUrl(): string;
+  setVideoUrl(value: string): NewExercise;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): NewExercise.AsObject;
@@ -55,6 +62,7 @@ export namespace NewExercise {
     userId: string,
     name: string,
     description: string,
+    videoUrl: string,
   }
 }
 

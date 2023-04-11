@@ -1,6 +1,7 @@
 import { NewUser } from '../grpc/user_pb'
 import { UserServiceClient } from '../grpc/UserServiceClientPb'
 import { renderUser } from './renderUser'
+import { authToken } from '../util/auth'
 
 const client = new UserServiceClient('http://localhost:8080')
 
@@ -16,7 +17,7 @@ export const createUser = () => {
     const newUserRequest = new NewUser()
     newUserRequest.setName(name)
     newUserRequest.setEmail(email)
-    client.createUser(newUserRequest, {}, (err, response) => {
+    client.createUser(newUserRequest, { token: authToken() }, (err, response) => {
       if (err) {
         console.error(err)
         alert('Error creating user')

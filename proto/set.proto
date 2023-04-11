@@ -17,10 +17,14 @@ message Set {
   string id = 1;
   string exercise_id = 2;
   string superset_id = 3;
+  int32 reps = 4;
+  int32 position = 5;
 }
 message NewSet {
   string exercise_id = 1;
   string superset_id = 2;
+  int32 reps = 3;
+  int32 position = 4;
 }
 message Sets {
   repeated Set sets = 1;

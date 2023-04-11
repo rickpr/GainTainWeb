@@ -12,6 +12,12 @@ export class Set extends jspb.Message {
   getSupersetId(): string;
   setSupersetId(value: string): Set;
 
+  getReps(): number;
+  setReps(value: number): Set;
+
+  getPosition(): number;
+  setPosition(value: number): Set;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Set.AsObject;
   static toObject(includeInstance: boolean, msg: Set): Set.AsObject;
@@ -25,6 +31,8 @@ export namespace Set {
     id: string,
     exerciseId: string,
     supersetId: string,
+    reps: number,
+    position: number,
   }
 }
 
@@ -34,6 +42,12 @@ export class NewSet extends jspb.Message {
 
   getSupersetId(): string;
   setSupersetId(value: string): NewSet;
+
+  getReps(): number;
+  setReps(value: number): NewSet;
+
+  getPosition(): number;
+  setPosition(value: number): NewSet;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): NewSet.AsObject;
@@ -47,6 +61,8 @@ export namespace NewSet {
   export type AsObject = {
     exerciseId: string,
     supersetId: string,
+    reps: number,
+    position: number,
   }
 }
 

@@ -1,10 +1,12 @@
 import './index.css'
 import { listUsers } from './users/list'
+import { listExercises } from './exercises/list'
 import { Login } from './login'
 
 import FourOhFourHTML from './404.html'
 import UsersHTML from './users/index.html'
 import LoginHTML from './login/index.html'
+import ExerciseHTML from './exercises/index.html'
 
 interface Route {
   html: string;
@@ -19,6 +21,10 @@ const routes: { [key: string]: Route } = {
   '/login': {
     html: LoginHTML,
     js: Login
+  },
+  '/exercises': {
+    html: ExerciseHTML,
+    js: listExercises
   },
   '404': {
     html: FourOhFourHTML,

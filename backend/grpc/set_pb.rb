@@ -9,10 +9,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :id, :string, 1
       optional :exercise_id, :string, 2
       optional :superset_id, :string, 3
+      optional :reps, :int32, 4
+      optional :position, :int32, 5
     end
     add_message "gaintain.NewSet" do
       optional :exercise_id, :string, 1
       optional :superset_id, :string, 2
+      optional :reps, :int32, 3
+      optional :position, :int32, 4
     end
     add_message "gaintain.Sets" do
       repeated :sets, :message, 1, "gaintain.Set"

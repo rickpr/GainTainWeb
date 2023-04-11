@@ -18,11 +18,13 @@ message Exercise {
   string user_id = 2;
   string name = 3;
   string description = 4;
+  string video_url = 5;
 }
 message NewExercise {
   string user_id = 1;
   string name = 2;
   string description = 3;
+  string video_url = 4;
 }
 message Exercises {
   repeated Exercise exercises = 1;

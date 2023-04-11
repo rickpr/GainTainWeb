@@ -164,7 +164,8 @@ proto.gaintain.Superset.prototype.toObject = function(opt_includeInstance) {
 proto.gaintain.Superset.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    workoutId: jspb.Message.getFieldWithDefault(msg, 2, "")
+    workoutId: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    position: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
   if (includeInstance) {
@@ -209,6 +210,10 @@ proto.gaintain.Superset.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.setWorkoutId(value);
       break;
+    case 3:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setPosition(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -252,6 +257,13 @@ proto.gaintain.Superset.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getPosition();
+  if (f !== 0) {
+    writer.writeInt32(
+      3,
+      f
+    );
+  }
 };
 
 
@@ -288,6 +300,24 @@ proto.gaintain.Superset.prototype.getWorkoutId = function() {
  */
 proto.gaintain.Superset.prototype.setWorkoutId = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional int32 position = 3;
+ * @return {number}
+ */
+proto.gaintain.Superset.prototype.getPosition = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.gaintain.Superset} returns this
+ */
+proto.gaintain.Superset.prototype.setPosition = function(value) {
+  return jspb.Message.setProto3IntField(this, 3, value);
 };
 
 

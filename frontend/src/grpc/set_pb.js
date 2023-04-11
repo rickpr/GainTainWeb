@@ -165,7 +165,9 @@ proto.gaintain.Set.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
     exerciseId: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    supersetId: jspb.Message.getFieldWithDefault(msg, 3, "")
+    supersetId: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    reps: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    position: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
   if (includeInstance) {
@@ -214,6 +216,14 @@ proto.gaintain.Set.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.setSupersetId(value);
       break;
+    case 4:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setReps(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setPosition(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -261,6 +271,20 @@ proto.gaintain.Set.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       3,
+      f
+    );
+  }
+  f = message.getReps();
+  if (f !== 0) {
+    writer.writeInt32(
+      4,
+      f
+    );
+  }
+  f = message.getPosition();
+  if (f !== 0) {
+    writer.writeInt32(
+      5,
       f
     );
   }
@@ -321,6 +345,42 @@ proto.gaintain.Set.prototype.setSupersetId = function(value) {
 };
 
 
+/**
+ * optional int32 reps = 4;
+ * @return {number}
+ */
+proto.gaintain.Set.prototype.getReps = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.gaintain.Set} returns this
+ */
+proto.gaintain.Set.prototype.setReps = function(value) {
+  return jspb.Message.setProto3IntField(this, 4, value);
+};
+
+
+/**
+ * optional int32 position = 5;
+ * @return {number}
+ */
+proto.gaintain.Set.prototype.getPosition = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.gaintain.Set} returns this
+ */
+proto.gaintain.Set.prototype.setPosition = function(value) {
+  return jspb.Message.setProto3IntField(this, 5, value);
+};
+
+
 
 
 
@@ -354,7 +414,9 @@ proto.gaintain.NewSet.prototype.toObject = function(opt_includeInstance) {
 proto.gaintain.NewSet.toObject = function(includeInstance, msg) {
   var f, obj = {
     exerciseId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    supersetId: jspb.Message.getFieldWithDefault(msg, 2, "")
+    supersetId: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    reps: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    position: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
   if (includeInstance) {
@@ -399,6 +461,14 @@ proto.gaintain.NewSet.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.setSupersetId(value);
       break;
+    case 3:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setReps(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setPosition(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -442,6 +512,20 @@ proto.gaintain.NewSet.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getReps();
+  if (f !== 0) {
+    writer.writeInt32(
+      3,
+      f
+    );
+  }
+  f = message.getPosition();
+  if (f !== 0) {
+    writer.writeInt32(
+      4,
+      f
+    );
+  }
 };
 
 
@@ -478,6 +562,42 @@ proto.gaintain.NewSet.prototype.getSupersetId = function() {
  */
 proto.gaintain.NewSet.prototype.setSupersetId = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional int32 reps = 3;
+ * @return {number}
+ */
+proto.gaintain.NewSet.prototype.getReps = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.gaintain.NewSet} returns this
+ */
+proto.gaintain.NewSet.prototype.setReps = function(value) {
+  return jspb.Message.setProto3IntField(this, 3, value);
+};
+
+
+/**
+ * optional int32 position = 4;
+ * @return {number}
+ */
+proto.gaintain.NewSet.prototype.getPosition = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.gaintain.NewSet} returns this
+ */
+proto.gaintain.NewSet.prototype.setPosition = function(value) {
+  return jspb.Message.setProto3IntField(this, 4, value);
 };
 
 

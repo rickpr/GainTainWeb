@@ -1,12 +1,13 @@
-#!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require './models/application_record'
 
 class Exercise < ApplicationRecord
   belongs_to :user
   has_many :sets
+  has_many :supersets, through: :sets
 
   def to_proto
-    Gaintain::Exercise.new(id: id, user_id: user_id, name: name, description: description)
+    Gaintain::Exercise.new(id:, user_id:, name:, description:, video_url:)
   end
 end

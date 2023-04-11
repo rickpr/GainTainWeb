@@ -8,6 +8,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "gaintain.Superset" do
       optional :id, :string, 1
       optional :workout_id, :string, 2
+      optional :position, :int32, 3
     end
     add_message "gaintain.NewSuperset" do
       optional :workout_id, :string, 1

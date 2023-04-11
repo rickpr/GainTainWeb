@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require 'bcrypt'
 
@@ -6,6 +6,7 @@ require './models/application_record'
 
 class User < ApplicationRecord
   has_many :workouts
+  has_many :exercises
 
   def password
     @password ||= BCrypt::Password.new(hashed_password)

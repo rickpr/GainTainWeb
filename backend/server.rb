@@ -5,11 +5,14 @@
 require 'grpc'
 
 require './lib/database'
+require './lib/auth'
 
 GRPC_PATH = "#{__dir__}/grpc".freeze
 $LOAD_PATH.unshift(GRPC_PATH) unless $LOAD_PATH.include?(GRPC_PATH)
+
 require './services/user_service'
 require './services/login_service'
+require './services/exercise_service'
 
 def main
   Database.connect!
@@ -18,6 +21,7 @@ def main
 
   s.handle(UserService)
   s.handle(LoginService)
+  s.handle(ExerciseService)
 
   # Runs the server with SIGHUP, SIGINT and SIGTERM signal handlers to
   #   gracefully shutdown.

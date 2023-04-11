@@ -4,33 +4,45 @@
 require 'active_record'
 
 DB_CONFIG       = YAML.load(File.open('config/database.yml'))
+DB_CONFIG_TEST  = DB_CONFIG.merge('database' => 'gaintain-test')
 DB_CONFIG_ADMIN = DB_CONFIG.merge('database' => 'postgres', 'schema_search_path' => 'public')
 
 namespace :db do
   desc 'Create the database'
   task :create do
-    ActiveRecord::Base.establish_connection(DB_CONFIG_ADMIN)
-    ActiveRecord::Base.connection.create_database(DB_CONFIG['database'])
-    puts 'Database created.'
+    DatabaseTasks.create(DB_CONFIG)
   end
 
   desc 'Migrate the database'
   task :migrate do
-    ActiveRecord::Base.establish_connection(DB_CONFIG)
-    ActiveRecord::MigrationContext.new('db/migrations').migrate
-    Rake::Task['db:schema'].invoke
-    puts 'Database migrated.'
+    DatabaseTasks.migrate(DB_CONFIG)
   end
 
   desc 'Drop the database'
   task :drop do
-    ActiveRecord::Base.establish_connection(DB_CONFIG_ADMIN)
-    ActiveRecord::Base.connection.drop_database(DB_CONFIG['database'])
-    puts 'Database deleted.'
+    DatabaseTasks.drop(DB_CONFIG)
   end
 
   desc 'Reset the database'
   task reset: %i[drop create migrate]
+
+  desc 'Create the test database'
+  task :create_test do
+    DatabaseTasks.create(DB_CONFIG_TEST)
+  end
+
+  desc 'Migrate the test database'
+  task :migrate_test do
+    DatabaseTasks.migrate(DB_CONFIG_TEST)
+  end
+
+  desc 'Drop the test database'
+  task :drop_test do
+    DatabaseTasks.drop(DB_CONFIG_TEST)
+  end
+
+  desc 'Reset the test database'
+  task reset_test: %i[drop_test create_test migrate_test]
 
   desc 'Create a db/schema.rb file that is portable against any DB supported by AR'
   task :schema do
@@ -71,4 +83,28 @@ task :console do
   # rubocop:disable Lint/Debugger
   binding.irb
   # rubocop:enable Lint/Debugger
+end
+
+module DatabaseTasks
+  # Helper module for database tasks
+  class << self
+    def create(db_config)
+      ActiveRecord::Base.establish_connection(DB_CONFIG_ADMIN)
+      ActiveRecord::Base.connection.create_database(db_config['database'])
+      puts 'Database created.'
+    end
+
+    def migrate(db_config)
+      ActiveRecord::Base.establish_connection(db_config)
+      ActiveRecord::MigrationContext.new('db/migrations').migrate
+      Rake::Task['db:schema'].invoke
+      puts 'Database migrated.'
+    end
+
+    def drop(db_config)
+      ActiveRecord::Base.establish_connection(DB_CONFIG_ADMIN)
+      ActiveRecord::Base.connection.drop_database(db_config['database'])
+      puts 'Database deleted.'
+    end
+  end
 end

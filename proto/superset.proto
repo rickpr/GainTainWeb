@@ -16,6 +16,7 @@ service SupersetService {
 message Superset {
   string id = 1;
   string workout_id = 2;
+  int32 position = 3;
 }
 message NewSuperset {
   string workout_id = 1;
