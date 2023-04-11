@@ -17,12 +17,12 @@ export const Login = () => {
 
     client.login(loginRequest, {}, (err, response) => {
       if (err) {
-        console.error(err)
         alert(err)
         return
       }
 
       document.cookie = `token=${response.getToken()}; SameSite=strict`
+      window.location.href = '/'
     })
   }
 }

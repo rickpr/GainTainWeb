@@ -1,10 +1,23 @@
 # frozen_string_literal: true
 
 require 'jwt'
+require './models/user'
+require './lib/database'
 
 # Handles authentication
 module Auth
   class << self
+    def with_authentication(grpc_call, &block)
+      Database.with_database do
+        token = grpc_call.metadata['token']
+        payload = decode(token)
+        user = User.find_by(id: payload['user_id'])
+        raise GRPC::BadStatus.new_status_exception(2, 'Login required') unless user
+
+        block.call(user)
+      end
+    end
+
     def encode(payload)
       JWT.encode(payload, private_key, 'ED25519')
     end

@@ -2,10 +2,13 @@ import { UsersRequest } from '../grpc/user_pb'
 import { UserServiceClient } from '../grpc/UserServiceClientPb'
 import { createUser } from './create'
 import { renderUser } from './renderUser'
+import { requireAuth } from '../util/auth'
 
 const client = new UserServiceClient('http://localhost:8080')
 
 export const listUsers = () => {
+  if (!requireAuth()) return
+
   const usersTableBody = document.getElementById('users')
   const listRequest = new UsersRequest()
   // TODO: figure out if this is the best way to do this.

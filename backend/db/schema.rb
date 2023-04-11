@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_19_193107) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_10_213917) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_19_193107) do
     t.bigint "user_id", null: false
     t.text "name", null: false
     t.text "description"
+    t.text "video_url"
     t.index ["user_id"], name: "index_exercises_on_user_id"
   end
 
@@ -25,6 +26,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_19_193107) do
     t.bigint "exercise_id", null: false
     t.bigint "superset_id", null: false
     t.integer "reps"
+    t.integer "position"
     t.index ["exercise_id"], name: "index_sets_on_exercise_id"
     t.index ["superset_id"], name: "index_sets_on_superset_id"
   end

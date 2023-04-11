@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require './models/user'
 require './grpc/login_services_pb'
 require './lib/auth'
 
