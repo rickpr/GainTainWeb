@@ -17,6 +17,6 @@ class User < ApplicationRecord
   end
 
   def to_proto
-    Gaintain::User.new(id: id, email: email, name: name)
+    Gaintain::User.new(id:, email:, name:)
   end
 end

@@ -1,8 +1,21 @@
 <table>
-    <thead>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-    </thead>
-    <tbody id="users" />
+  <thead>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Email</th>
+  </thead>
+  <tbody id="users" />
 </table>
+
+<h1>Add User</h1>
+<form id="create-user" action="javascript:void(0);">
+  <div class="flex-column">
+    <label for="name">Name</label>
+    <input type="text" name="name" />
+    <label for="email">E-mail</label>
+    <input type="text" name="email" />
+    <label for="password">Password</label>
+    <input type="password" name="password" />
+    <input type="submit" value="Add User" />
+  </div>
+</form>

@@ -1,10 +1,19 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
+# Database ORM
 gem 'activerecord'
+# Password storage
 gem 'bcrypt'
+# Web protocol
 gem 'grpc'
+# Authentication
+gem 'jwt'
+# Database driver
 gem 'pg'
+# Crypto for JWT
+gem 'rbnacl'
 
-group :development do
-  gem 'grpc-tools'
-end
+group(:development, :test) { gem 'minitest' }
+group(:development) { gem 'grpc-tools' }

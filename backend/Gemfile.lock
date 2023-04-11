@@ -13,6 +13,7 @@ GEM
       tzinfo (~> 2.0)
     bcrypt (3.1.18)
     concurrent-ruby (1.1.10)
+    ffi (1.15.5)
     google-protobuf (3.21.12)
     googleapis-common-protos-types (1.5.0)
       google-protobuf (~> 3.14)
@@ -22,8 +23,11 @@ GEM
     grpc-tools (1.50.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
+    jwt (2.7.0)
     minitest (5.17.0)
     pg (1.4.5)
+    rbnacl (7.1.1)
+      ffi
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
 
@@ -36,7 +40,10 @@ DEPENDENCIES
   bcrypt
   grpc
   grpc-tools
+  jwt
+  minitest
   pg
+  rbnacl
 
 BUNDLED WITH
    2.4.4

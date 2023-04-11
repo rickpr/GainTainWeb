@@ -1,20 +1,22 @@
+# frozen_string_literal: true
+
 # stolen from https://gist.githubusercontent.com/schickling/6762581/raw/f0669da3d55042c74152b1c9c6330592c1102508/Rakefile
 require 'active_record'
 
-namespace :db do
-  db_config       = YAML::load(File.open('config/database.yml'))
-  db_config_admin = db_config.merge({'database' => 'postgres', 'schema_search_path' => 'public'})
+DB_CONFIG       = YAML.load(File.open('config/database.yml'))
+DB_CONFIG_ADMIN = DB_CONFIG.merge('database' => 'postgres', 'schema_search_path' => 'public')
 
+namespace :db do
   desc 'Create the database'
   task :create do
-    ActiveRecord::Base.establish_connection(db_config_admin)
-    ActiveRecord::Base.connection.create_database(db_config['database'])
+    ActiveRecord::Base.establish_connection(DB_CONFIG_ADMIN)
+    ActiveRecord::Base.connection.create_database(DB_CONFIG['database'])
     puts 'Database created.'
   end
 
   desc 'Migrate the database'
   task :migrate do
-    ActiveRecord::Base.establish_connection(db_config)
+    ActiveRecord::Base.establish_connection(DB_CONFIG)
     ActiveRecord::MigrationContext.new('db/migrations').migrate
     Rake::Task['db:schema'].invoke
     puts 'Database migrated.'
@@ -22,24 +24,23 @@ namespace :db do
 
   desc 'Drop the database'
   task :drop do
-    ActiveRecord::Base.establish_connection(db_config_admin)
-    ActiveRecord::Base.connection.drop_database(db_config['database'])
+    ActiveRecord::Base.establish_connection(DB_CONFIG_ADMIN)
+    ActiveRecord::Base.connection.drop_database(DB_CONFIG['database'])
     puts 'Database deleted.'
   end
 
   desc 'Reset the database'
-  task :reset => [:drop, :create, :migrate]
+  task reset: %i[drop create migrate]
 
   desc 'Create a db/schema.rb file that is portable against any DB supported by AR'
   task :schema do
-    ActiveRecord::Base.establish_connection(db_config)
+    ActiveRecord::Base.establish_connection(DB_CONFIG)
     require 'active_record/schema_dumper'
     filename = 'db/schema.rb'
     File.open(filename, 'w:utf-8') do |file|
       ActiveRecord::SchemaDumper.dump(ActiveRecord::Base.connection, file)
     end
   end
-
 end
 
 namespace :g do
@@ -51,15 +52,23 @@ namespace :g do
     migration_class = name.split('_').map(&:capitalize).join
 
     File.open(path, 'w') do |file|
-      file.write <<-EOF
-class #{migration_class} < ActiveRecord::Migration
-  def change
-  end
-end
-      EOF
+      file.write <<~RUBY
+        class #{migration_class} < ActiveRecord::Migration
+          def change
+          end
+        end
+      RUBY
     end
 
     puts "Migration #{path} created"
     abort # needed stop other tasks
   end
+end
+
+task :console do
+  ActiveRecord::Base.establish_connection(DB_CONFIG)
+  require './server'
+  # rubocop:disable Lint/Debugger
+  binding.irb
+  # rubocop:enable Lint/Debugger
 end

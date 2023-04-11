@@ -1,3 +1,4 @@
+---
 host: localhost
 adapter: postgresql
 encoding: utf-8
