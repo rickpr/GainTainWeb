@@ -30,7 +30,9 @@ message Sets {
   repeated Set sets = 1;
 }
 
-message SetsRequest {}
+message SetsRequest {
+  string superset_id = 1;
+}
 message SetRequest {
   string id = 1;
 }

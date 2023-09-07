@@ -3,7 +3,7 @@ export const authToken = (): string | undefined => {
 }
 
 export const requireAuth = (): boolean => {
-  if (authToken()) {
+  if (authToken() !== undefined) {
     return true
   } else {
     window.location.replace('/login')

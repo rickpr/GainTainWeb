@@ -25,7 +25,9 @@ message Supersets {
   repeated Superset supersets = 1;
 }
 
-message SupersetsRequest {}
+message SupersetsRequest {
+  string workout_id = 1;
+}
 message SupersetRequest {
   string id = 1;
 }

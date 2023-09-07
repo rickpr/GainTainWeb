@@ -6,19 +6,22 @@ import { authToken, requireAuth } from '../util/auth'
 
 const client = new ExerciseServiceClient('http://localhost:8080')
 
-export const listExercises = () => {
+export const listExercises = (): void => {
   if (!requireAuth()) return
+  const token = authToken() as string
 
   const exercisesTableBody = document.getElementById('exercises')
   const listRequest = new ExercisesRequest()
-  client.listExercises(listRequest, { token: authToken() }, (err, response) => {
-    if (err) {
+  client.listExercises(listRequest, { token }, (err, response) => {
+    if (err !== null) {
       console.error(err)
-      exercisesTableBody.innerHTML = '<tr>Error</tr>'
+      if (exercisesTableBody !== null) exercisesTableBody.innerHTML = '<tr>Error</tr>'
       return
     }
 
-    exercisesTableBody.innerHTML = response.getExercisesList().map(renderExercise).join('')
+    if (exercisesTableBody !== null) {
+      exercisesTableBody.innerHTML = response.getExercisesList().map(renderExercise).join('')
+    }
   })
 
   createExercise()

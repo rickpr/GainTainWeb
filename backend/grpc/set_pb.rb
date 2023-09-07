@@ -22,6 +22,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :sets, :message, 1, "gaintain.Set"
     end
     add_message "gaintain.SetsRequest" do
+      optional :superset_id, :string, 1
     end
     add_message "gaintain.SetRequest" do
       optional :id, :string, 1

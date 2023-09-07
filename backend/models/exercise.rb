@@ -4,7 +4,7 @@ require './models/application_record'
 
 class Exercise < ApplicationRecord
   belongs_to :user
-  has_many :sets
+  has_many :sets, class_name: :Gset
   has_many :supersets, through: :sets
 
   def to_proto

@@ -87,6 +87,9 @@ export namespace Sets {
 }
 
 export class SetsRequest extends jspb.Message {
+  getSupersetId(): string;
+  setSupersetId(value: string): SetsRequest;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): SetsRequest.AsObject;
   static toObject(includeInstance: boolean, msg: SetsRequest): SetsRequest.AsObject;
@@ -97,6 +100,7 @@ export class SetsRequest extends jspb.Message {
 
 export namespace SetsRequest {
   export type AsObject = {
+    supersetId: string,
   }
 }
 

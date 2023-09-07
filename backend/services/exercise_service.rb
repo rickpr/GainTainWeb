@@ -40,7 +40,9 @@ class ExerciseService < Gaintain::ExerciseService::Service
 
   def delete_exercise(exercise_request, grpc_call)
     Auth.with_authentication(grpc_call) do |current_user|
-      current_user.exercises.find(exercise_request.id).destroy!
+      exercise = current_user.exercises.find(exercise_request.id)
+      exercise.destroy!
+      exercise.to_proto
     end
   end
 end

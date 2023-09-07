@@ -4,8 +4,9 @@ require './models/application_record'
 
 class Superset < ApplicationRecord
   belongs_to :workout
-  has_many :sets, -> { order(:position) }
+  has_many :sets, -> { order(:position) }, class_name: :Gset, dependent: :destroy
   has_many :exercises, through: :sets
+  acts_as_list scope: :workout
 
   def to_proto
     Gaintain::Superset.new(id:, workout_id:, position:)

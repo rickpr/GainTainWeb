@@ -793,7 +793,7 @@ proto.gaintain.SetsRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.gaintain.SetsRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    supersetId: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -830,6 +830,10 @@ proto.gaintain.SetsRequest.deserializeBinaryFromReader = function(msg, reader) {
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setSupersetId(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -859,6 +863,31 @@ proto.gaintain.SetsRequest.prototype.serializeBinary = function() {
  */
 proto.gaintain.SetsRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getSupersetId();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string superset_id = 1;
+ * @return {string}
+ */
+proto.gaintain.SetsRequest.prototype.getSupersetId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.gaintain.SetsRequest} returns this
+ */
+proto.gaintain.SetsRequest.prototype.setSupersetId = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 

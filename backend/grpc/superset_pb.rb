@@ -17,6 +17,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :supersets, :message, 1, "gaintain.Superset"
     end
     add_message "gaintain.SupersetsRequest" do
+      optional :workout_id, :string, 1
     end
     add_message "gaintain.SupersetRequest" do
       optional :id, :string, 1

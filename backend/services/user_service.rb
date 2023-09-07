@@ -37,6 +37,10 @@ class UserService < Gaintain::UserService::Service
   end
 
   def delete_user(user_request, grpc_call)
-    Auth.with_authentication(grpc_call) { User.find(user_request.id).destroy! }
+    Auth.with_authentication(grpc_call) do
+      user = User.find(user_request.id)
+      user.destroy!
+      user.to_proto
+    end
   end
 end

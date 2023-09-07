@@ -67,6 +67,9 @@ export namespace Supersets {
 }
 
 export class SupersetsRequest extends jspb.Message {
+  getWorkoutId(): string;
+  setWorkoutId(value: string): SupersetsRequest;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): SupersetsRequest.AsObject;
   static toObject(includeInstance: boolean, msg: SupersetsRequest): SupersetsRequest.AsObject;
@@ -77,6 +80,7 @@ export class SupersetsRequest extends jspb.Message {
 
 export namespace SupersetsRequest {
   export type AsObject = {
+    workoutId: string,
   }
 }
 

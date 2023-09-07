@@ -3,12 +3,13 @@ import { LoginServiceClient } from '../grpc/LoginServiceClientPb'
 
 const client = new LoginServiceClient('http://localhost:8080')
 
-export const Login = () => {
+export const Login = (): void => {
   const loginForm = document.getElementById('login')
+  if (loginForm === null) return
 
-  loginForm.onsubmit = (event: any) => {
+  loginForm.onsubmit = (event: SubmitEvent) => {
     event.preventDefault()
-    const formData = new FormData(event.target)
+    const formData = new FormData(event.target as HTMLFormElement)
     const email = formData.get('email') as string
     const password = formData.get('password') as string
     const loginRequest = new LoginRequest()
@@ -16,7 +17,7 @@ export const Login = () => {
     loginRequest.setPassword(password)
 
     client.login(loginRequest, {}, (err, response) => {
-      if (err) {
+      if (err !== null) {
         alert(err)
         return
       }

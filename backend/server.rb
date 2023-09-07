@@ -10,18 +10,24 @@ require './lib/auth'
 GRPC_PATH = "#{__dir__}/grpc".freeze
 $LOAD_PATH.unshift(GRPC_PATH) unless $LOAD_PATH.include?(GRPC_PATH)
 
-require './services/user_service'
-require './services/login_service'
 require './services/exercise_service'
+require './services/login_service'
+require './services/set_service'
+require './services/superset_service'
+require './services/user_service'
+require './services/workout_service'
 
 def main
   Database.connect!
   s = GRPC::RpcServer.new
   s.add_http2_port('0.0.0.0:50051', :this_port_is_insecure)
 
-  s.handle(UserService)
-  s.handle(LoginService)
   s.handle(ExerciseService)
+  s.handle(LoginService)
+  s.handle(SetService)
+  s.handle(SupersetService)
+  s.handle(UserService)
+  s.handle(WorkoutService)
 
   # Runs the server with SIGHUP, SIGINT and SIGTERM signal handlers to
   #   gracefully shutdown.

@@ -18,6 +18,11 @@ namespace :db do
     DatabaseTasks.migrate(DB_CONFIG)
   end
 
+  desc 'Rollback the database'
+  task :rollback do
+    DatabaseTasks.rollback(DB_CONFIG)
+  end
+
   desc 'Drop the database'
   task :drop do
     DatabaseTasks.drop(DB_CONFIG)
@@ -34,6 +39,11 @@ namespace :db do
   desc 'Migrate the test database'
   task :migrate_test do
     DatabaseTasks.migrate(DB_CONFIG_TEST)
+  end
+
+  desc 'Rollback the test database'
+  task :rollback_test do
+    DatabaseTasks.rollback(DB_CONFIG_TEST)
   end
 
   desc 'Drop the test database'
@@ -99,6 +109,13 @@ module DatabaseTasks
       ActiveRecord::MigrationContext.new('db/migrations').migrate
       Rake::Task['db:schema'].invoke
       puts 'Database migrated.'
+    end
+
+    def rollback(db_config)
+      ActiveRecord::Base.establish_connection(db_config)
+      ActiveRecord::MigrationContext.new('db/migrations').rollback
+      Rake::Task['db:schema'].invoke
+      puts 'Database rolled back.'
     end
 
     def drop(db_config)

@@ -4,6 +4,8 @@ source 'https://rubygems.org'
 
 # Database ORM
 gem 'activerecord'
+# Orderable lists
+gem 'acts_as_list'
 # Password storage
 gem 'bcrypt'
 # Web protocol
@@ -15,5 +17,5 @@ gem 'pg'
 # Crypto for JWT
 gem 'rbnacl'
 
-group(:development, :test) { gem 'minitest' }
 group(:development) { gem 'grpc-tools' }
+group(:development, :test) { gem 'minitest' }

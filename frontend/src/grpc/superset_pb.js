@@ -643,7 +643,7 @@ proto.gaintain.SupersetsRequest.prototype.toObject = function(opt_includeInstanc
  */
 proto.gaintain.SupersetsRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    workoutId: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -680,6 +680,10 @@ proto.gaintain.SupersetsRequest.deserializeBinaryFromReader = function(msg, read
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setWorkoutId(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -709,6 +713,31 @@ proto.gaintain.SupersetsRequest.prototype.serializeBinary = function() {
  */
 proto.gaintain.SupersetsRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getWorkoutId();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string workout_id = 1;
+ * @return {string}
+ */
+proto.gaintain.SupersetsRequest.prototype.getWorkoutId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.gaintain.SupersetsRequest} returns this
+ */
+proto.gaintain.SupersetsRequest.prototype.setWorkoutId = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
