@@ -8,20 +8,21 @@ const client = new ExerciseServiceClient('http://localhost:8080')
 
 export const listExercises = (): void => {
   if (!requireAuth()) return
-  const token = authToken() as string
-
   const exercisesTableBody = document.getElementById('exercises')
+  if (exercisesTableBody === null) return
+
+  const token = authToken() as string
   const listRequest = new ExercisesRequest()
   client.listExercises(listRequest, { token }, (err, response) => {
     if (err !== null) {
       console.error(err)
-      if (exercisesTableBody !== null) exercisesTableBody.innerHTML = '<tr>Error</tr>'
+      exercisesTableBody.innerHTML = '<tr>Error</tr>'
       return
     }
 
-    if (exercisesTableBody !== null) {
-      exercisesTableBody.innerHTML = response.getExercisesList().map(renderExercise).join('')
-    }
+    response.getExercisesList().forEach(exercise => {
+      exercisesTableBody.appendChild(renderExercise(exercise))
+    })
   })
 
   createExercise()

@@ -31,7 +31,7 @@ export const createExercise = (): void => {
       }
 
       if (exercisesTableBody?.innerHTML !== undefined) {
-        exercisesTableBody.innerHTML += renderExercise(response)
+        exercisesTableBody.appendChild(renderExercise(response))
       }
     })
   }
