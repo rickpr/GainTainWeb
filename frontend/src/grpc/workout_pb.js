@@ -21,6 +21,8 @@ var global =
     (function () { return this; }).call(null) ||
     Function('return this')();
 
+var superset_pb = require('./superset_pb.js');
+goog.object.extend(proto, superset_pb);
 goog.exportSymbol('proto.gaintain.NewWorkout', null, global);
 goog.exportSymbol('proto.gaintain.Workout', null, global);
 goog.exportSymbol('proto.gaintain.WorkoutRequest', null, global);
@@ -37,7 +39,7 @@ goog.exportSymbol('proto.gaintain.WorkoutsRequest', null, global);
  * @constructor
  */
 proto.gaintain.Workout = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.gaintain.Workout.repeatedFields_, null);
 };
 goog.inherits(proto.gaintain.Workout, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -132,6 +134,13 @@ if (goog.DEBUG && !COMPILED) {
   proto.gaintain.WorkoutRequest.displayName = 'proto.gaintain.WorkoutRequest';
 }
 
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.gaintain.Workout.repeatedFields_ = [5];
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -166,7 +175,9 @@ proto.gaintain.Workout.toObject = function(includeInstance, msg) {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
     userId: jspb.Message.getFieldWithDefault(msg, 2, ""),
     name: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    description: jspb.Message.getFieldWithDefault(msg, 4, "")
+    description: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    supersetsList: jspb.Message.toObjectList(msg.getSupersetsList(),
+    superset_pb.Superset.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -218,6 +229,11 @@ proto.gaintain.Workout.deserializeBinaryFromReader = function(msg, reader) {
     case 4:
       var value = /** @type {string} */ (reader.readString());
       msg.setDescription(value);
+      break;
+    case 5:
+      var value = new superset_pb.Superset;
+      reader.readMessage(value,superset_pb.Superset.deserializeBinaryFromReader);
+      msg.addSupersets(value);
       break;
     default:
       reader.skipField();
@@ -274,6 +290,14 @@ proto.gaintain.Workout.serializeBinaryToWriter = function(message, writer) {
     writer.writeString(
       4,
       f
+    );
+  }
+  f = message.getSupersetsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      5,
+      f,
+      superset_pb.Superset.serializeBinaryToWriter
     );
   }
 };
@@ -348,6 +372,44 @@ proto.gaintain.Workout.prototype.getDescription = function() {
  */
 proto.gaintain.Workout.prototype.setDescription = function(value) {
   return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * repeated Superset supersets = 5;
+ * @return {!Array<!proto.gaintain.Superset>}
+ */
+proto.gaintain.Workout.prototype.getSupersetsList = function() {
+  return /** @type{!Array<!proto.gaintain.Superset>} */ (
+    jspb.Message.getRepeatedWrapperField(this, superset_pb.Superset, 5));
+};
+
+
+/**
+ * @param {!Array<!proto.gaintain.Superset>} value
+ * @return {!proto.gaintain.Workout} returns this
+*/
+proto.gaintain.Workout.prototype.setSupersetsList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 5, value);
+};
+
+
+/**
+ * @param {!proto.gaintain.Superset=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.gaintain.Superset}
+ */
+proto.gaintain.Workout.prototype.addSupersets = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 5, opt_value, proto.gaintain.Superset, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.gaintain.Workout} returns this
+ */
+proto.gaintain.Workout.prototype.clearSupersetsList = function() {
+  return this.setSupersetsList([]);
 };
 
 

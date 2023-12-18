@@ -17,9 +17,9 @@ class SupersetService < Gaintain::SupersetService::Service
     Auth.with_authentication(grpc_call) { Superset.find(superset_request.id).to_proto }
   end
 
-  def create_set(new_superset, grpc_call)
+  def create_superset(new_superset, grpc_call)
     Auth.with_authentication(grpc_call) do
-      Set.create!(
+      Superset.create!(
         workout_id: new_superset.workout_id,
         position: new_superset.position
       ).to_proto

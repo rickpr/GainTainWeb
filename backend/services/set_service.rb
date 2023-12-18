@@ -14,7 +14,7 @@ class SetService < Gaintain::SetService::Service
   end
 
   def get_set(set_request, grpc_call)
-    Auth.with_authentication(grpc_call) { Set.find(set_request.id).to_proto }
+    Auth.with_authentication(grpc_call) { Gset.find(set_request.id).to_proto }
   end
 
   def create_set(new_set, grpc_call)

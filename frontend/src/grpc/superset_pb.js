@@ -21,6 +21,8 @@ var global =
     (function () { return this; }).call(null) ||
     Function('return this')();
 
+var set_pb = require('./set_pb.js');
+goog.object.extend(proto, set_pb);
 goog.exportSymbol('proto.gaintain.NewSuperset', null, global);
 goog.exportSymbol('proto.gaintain.Superset', null, global);
 goog.exportSymbol('proto.gaintain.SupersetRequest', null, global);
@@ -37,7 +39,7 @@ goog.exportSymbol('proto.gaintain.SupersetsRequest', null, global);
  * @constructor
  */
 proto.gaintain.Superset = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.gaintain.Superset.repeatedFields_, null);
 };
 goog.inherits(proto.gaintain.Superset, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -132,6 +134,13 @@ if (goog.DEBUG && !COMPILED) {
   proto.gaintain.SupersetRequest.displayName = 'proto.gaintain.SupersetRequest';
 }
 
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.gaintain.Superset.repeatedFields_ = [4];
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -165,7 +174,9 @@ proto.gaintain.Superset.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
     workoutId: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    position: jspb.Message.getFieldWithDefault(msg, 3, 0)
+    position: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    setsList: jspb.Message.toObjectList(msg.getSetsList(),
+    set_pb.Set.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -213,6 +224,11 @@ proto.gaintain.Superset.deserializeBinaryFromReader = function(msg, reader) {
     case 3:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setPosition(value);
+      break;
+    case 4:
+      var value = new set_pb.Set;
+      reader.readMessage(value,set_pb.Set.deserializeBinaryFromReader);
+      msg.addSets(value);
       break;
     default:
       reader.skipField();
@@ -262,6 +278,14 @@ proto.gaintain.Superset.serializeBinaryToWriter = function(message, writer) {
     writer.writeInt32(
       3,
       f
+    );
+  }
+  f = message.getSetsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      4,
+      f,
+      set_pb.Set.serializeBinaryToWriter
     );
   }
 };
@@ -321,6 +345,44 @@ proto.gaintain.Superset.prototype.setPosition = function(value) {
 };
 
 
+/**
+ * repeated Set sets = 4;
+ * @return {!Array<!proto.gaintain.Set>}
+ */
+proto.gaintain.Superset.prototype.getSetsList = function() {
+  return /** @type{!Array<!proto.gaintain.Set>} */ (
+    jspb.Message.getRepeatedWrapperField(this, set_pb.Set, 4));
+};
+
+
+/**
+ * @param {!Array<!proto.gaintain.Set>} value
+ * @return {!proto.gaintain.Superset} returns this
+*/
+proto.gaintain.Superset.prototype.setSetsList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 4, value);
+};
+
+
+/**
+ * @param {!proto.gaintain.Set=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.gaintain.Set}
+ */
+proto.gaintain.Superset.prototype.addSets = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 4, opt_value, proto.gaintain.Set, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.gaintain.Superset} returns this
+ */
+proto.gaintain.Superset.prototype.clearSetsList = function() {
+  return this.setSetsList([]);
+};
+
+
 
 
 
@@ -353,7 +415,8 @@ proto.gaintain.NewSuperset.prototype.toObject = function(opt_includeInstance) {
  */
 proto.gaintain.NewSuperset.toObject = function(includeInstance, msg) {
   var f, obj = {
-    workoutId: jspb.Message.getFieldWithDefault(msg, 1, "")
+    workoutId: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    position: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
   if (includeInstance) {
@@ -394,6 +457,10 @@ proto.gaintain.NewSuperset.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.setWorkoutId(value);
       break;
+    case 2:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setPosition(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -430,6 +497,13 @@ proto.gaintain.NewSuperset.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getPosition();
+  if (f !== 0) {
+    writer.writeInt32(
+      2,
+      f
+    );
+  }
 };
 
 
@@ -448,6 +522,24 @@ proto.gaintain.NewSuperset.prototype.getWorkoutId = function() {
  */
 proto.gaintain.NewSuperset.prototype.setWorkoutId = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional int32 position = 2;
+ * @return {number}
+ */
+proto.gaintain.NewSuperset.prototype.getPosition = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.gaintain.NewSuperset} returns this
+ */
+proto.gaintain.NewSuperset.prototype.setPosition = function(value) {
+  return jspb.Message.setProto3IntField(this, 2, value);
 };
 
 

@@ -9,6 +9,13 @@ require './lib/database'
 require './lib/auth'
 require './test/mock_grpc_call'
 
+require './services/exercise_service'
+require './services/login_service'
+require './services/set_service'
+require './services/superset_service'
+require './services/user_service'
+require './services/workout_service'
+
 module TestDatabase
   def connect!
     ActiveRecord::Base.establish_connection(

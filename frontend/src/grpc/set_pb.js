@@ -21,6 +21,8 @@ var global =
     (function () { return this; }).call(null) ||
     Function('return this')();
 
+var exercise_pb = require('./exercise_pb.js');
+goog.object.extend(proto, exercise_pb);
 goog.exportSymbol('proto.gaintain.NewSet', null, global);
 goog.exportSymbol('proto.gaintain.Set', null, global);
 goog.exportSymbol('proto.gaintain.SetRequest', null, global);
@@ -164,10 +166,10 @@ proto.gaintain.Set.prototype.toObject = function(opt_includeInstance) {
 proto.gaintain.Set.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    exerciseId: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    supersetId: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    reps: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    position: jspb.Message.getFieldWithDefault(msg, 5, 0)
+    supersetId: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    reps: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    position: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    exercise: (f = msg.getExercise()) && exercise_pb.Exercise.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -210,19 +212,20 @@ proto.gaintain.Set.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setExerciseId(value);
-      break;
-    case 3:
-      var value = /** @type {string} */ (reader.readString());
       msg.setSupersetId(value);
       break;
-    case 4:
+    case 3:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setReps(value);
       break;
-    case 5:
+    case 4:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setPosition(value);
+      break;
+    case 5:
+      var value = new exercise_pb.Exercise;
+      reader.readMessage(value,exercise_pb.Exercise.deserializeBinaryFromReader);
+      msg.setExercise(value);
       break;
     default:
       reader.skipField();
@@ -260,32 +263,33 @@ proto.gaintain.Set.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getExerciseId();
+  f = message.getSupersetId();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
-  f = message.getSupersetId();
-  if (f.length > 0) {
-    writer.writeString(
-      3,
-      f
-    );
-  }
   f = message.getReps();
   if (f !== 0) {
     writer.writeInt32(
-      4,
+      3,
       f
     );
   }
   f = message.getPosition();
   if (f !== 0) {
     writer.writeInt32(
-      5,
+      4,
       f
+    );
+  }
+  f = message.getExercise();
+  if (f != null) {
+    writer.writeMessage(
+      5,
+      f,
+      exercise_pb.Exercise.serializeBinaryToWriter
     );
   }
 };
@@ -310,10 +314,10 @@ proto.gaintain.Set.prototype.setId = function(value) {
 
 
 /**
- * optional string exercise_id = 2;
+ * optional string superset_id = 2;
  * @return {string}
  */
-proto.gaintain.Set.prototype.getExerciseId = function() {
+proto.gaintain.Set.prototype.getSupersetId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -322,35 +326,17 @@ proto.gaintain.Set.prototype.getExerciseId = function() {
  * @param {string} value
  * @return {!proto.gaintain.Set} returns this
  */
-proto.gaintain.Set.prototype.setExerciseId = function(value) {
+proto.gaintain.Set.prototype.setSupersetId = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional string superset_id = 3;
- * @return {string}
- */
-proto.gaintain.Set.prototype.getSupersetId = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.gaintain.Set} returns this
- */
-proto.gaintain.Set.prototype.setSupersetId = function(value) {
-  return jspb.Message.setProto3StringField(this, 3, value);
-};
-
-
-/**
- * optional int32 reps = 4;
+ * optional int32 reps = 3;
  * @return {number}
  */
 proto.gaintain.Set.prototype.getReps = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
 
@@ -359,16 +345,16 @@ proto.gaintain.Set.prototype.getReps = function() {
  * @return {!proto.gaintain.Set} returns this
  */
 proto.gaintain.Set.prototype.setReps = function(value) {
-  return jspb.Message.setProto3IntField(this, 4, value);
+  return jspb.Message.setProto3IntField(this, 3, value);
 };
 
 
 /**
- * optional int32 position = 5;
+ * optional int32 position = 4;
  * @return {number}
  */
 proto.gaintain.Set.prototype.getPosition = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
 };
 
 
@@ -377,7 +363,44 @@ proto.gaintain.Set.prototype.getPosition = function() {
  * @return {!proto.gaintain.Set} returns this
  */
 proto.gaintain.Set.prototype.setPosition = function(value) {
-  return jspb.Message.setProto3IntField(this, 5, value);
+  return jspb.Message.setProto3IntField(this, 4, value);
+};
+
+
+/**
+ * optional Exercise exercise = 5;
+ * @return {?proto.gaintain.Exercise}
+ */
+proto.gaintain.Set.prototype.getExercise = function() {
+  return /** @type{?proto.gaintain.Exercise} */ (
+    jspb.Message.getWrapperField(this, exercise_pb.Exercise, 5));
+};
+
+
+/**
+ * @param {?proto.gaintain.Exercise|undefined} value
+ * @return {!proto.gaintain.Set} returns this
+*/
+proto.gaintain.Set.prototype.setExercise = function(value) {
+  return jspb.Message.setWrapperField(this, 5, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.gaintain.Set} returns this
+ */
+proto.gaintain.Set.prototype.clearExercise = function() {
+  return this.setExercise(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.gaintain.Set.prototype.hasExercise = function() {
+  return jspb.Message.getField(this, 5) != null;
 };
 
 

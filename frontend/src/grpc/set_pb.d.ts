@@ -1,13 +1,11 @@
 import * as jspb from 'google-protobuf'
 
+import * as exercise_pb from './exercise_pb';
 
 
 export class Set extends jspb.Message {
   getId(): string;
   setId(value: string): Set;
-
-  getExerciseId(): string;
-  setExerciseId(value: string): Set;
 
   getSupersetId(): string;
   setSupersetId(value: string): Set;
@@ -17,6 +15,11 @@ export class Set extends jspb.Message {
 
   getPosition(): number;
   setPosition(value: number): Set;
+
+  getExercise(): exercise_pb.Exercise | undefined;
+  setExercise(value?: exercise_pb.Exercise): Set;
+  hasExercise(): boolean;
+  clearExercise(): Set;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Set.AsObject;
@@ -29,10 +32,10 @@ export class Set extends jspb.Message {
 export namespace Set {
   export type AsObject = {
     id: string,
-    exerciseId: string,
     supersetId: string,
     reps: number,
     position: number,
+    exercise?: exercise_pb.Exercise.AsObject,
   }
 }
 

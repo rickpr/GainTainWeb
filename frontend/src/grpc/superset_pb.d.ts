@@ -1,5 +1,6 @@
 import * as jspb from 'google-protobuf'
 
+import * as set_pb from './set_pb';
 
 
 export class Superset extends jspb.Message {
@@ -11,6 +12,11 @@ export class Superset extends jspb.Message {
 
   getPosition(): number;
   setPosition(value: number): Superset;
+
+  getSetsList(): Array<set_pb.Set>;
+  setSetsList(value: Array<set_pb.Set>): Superset;
+  clearSetsList(): Superset;
+  addSets(value?: set_pb.Set, index?: number): set_pb.Set;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Superset.AsObject;
@@ -25,12 +31,16 @@ export namespace Superset {
     id: string,
     workoutId: string,
     position: number,
+    setsList: Array<set_pb.Set.AsObject>,
   }
 }
 
 export class NewSuperset extends jspb.Message {
   getWorkoutId(): string;
   setWorkoutId(value: string): NewSuperset;
+
+  getPosition(): number;
+  setPosition(value: number): NewSuperset;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): NewSuperset.AsObject;
@@ -43,6 +53,7 @@ export class NewSuperset extends jspb.Message {
 export namespace NewSuperset {
   export type AsObject = {
     workoutId: string,
+    position: number,
   }
 }
 
